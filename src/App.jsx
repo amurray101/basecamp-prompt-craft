@@ -42,7 +42,7 @@ const DAY2_STEPS = [
     title: "The 'before' \u2014 Claude without CLAUDE.md",
     context: "claude",
     desc: "Launch Claude Code in the messy repo. Without a CLAUDE.md, Claude infers conventions from the code itself \u2014 sometimes right, sometimes wrong. Ask it to refactor a module and watch where it guesses.",
-    prompt: "Refactor src/utils/helpers.js \u2014 improve the code quality, add error handling, and write tests.",
+    prompt: "Refactor src/utils/helpers.js \u2014 improve the code quality and add error handling.",
     narration: "After Claude finishes: 'Look at the output. Did it use async/await or Promises? Did it add JSDoc or just inline comments? Did it put the test file in the right place? It made choices \u2014 but they were guesses. In a customer codebase with strong conventions, guesses create inconsistency.'",
     keyPoint: "This is the most important demo moment in the entire program. The 'before' output isn't bad \u2014 it's just inconsistent. That's the problem CLAUDE.md solves.",
     timing: "8 min",
@@ -50,28 +50,8 @@ const DAY2_STEPS = [
   {
     title: "Write your CLAUDE.md",
     context: "file",
-    desc: "CLAUDE.md has four key sections: Architecture (where things live), Conventions (how to write code), Testing (what 'tested' means), and Before Committing (the checklist). Create one now.",
-    code: `# Project: Basecamp Sample App
+    desc: "Based on what you saw exploring the codebase, write a CLAUDE.md at the repo root. Capture the patterns you noticed — how the code is organized, what style choices were made, where things are inconsistent. There's no fixed template. Describe this codebase the way you'd describe it to a new teammate on their first day.",
 
-## Architecture
-- Express.js backend with route handlers in /src/routes/
-- Utility modules in /src/utils/
-- Tests live next to source files: foo.ts \u2192 foo.test.ts
-
-## Conventions
-- Use async/await, never raw Promises
-- All functions need JSDoc comments
-- Error handling: always use try/catch with specific error types
-- Imports: group by external, internal, types
-
-## Testing
-- Framework: Jest with supertest for API tests
-- Every route needs at least one happy path and one error test
-- Run \`npm test\` before committing
-
-## Before committing
-- Run \`npm run lint && npm test\`
-- Never commit .env or node_modules`,
     codeTitle: "CLAUDE.md",
     tip: "In a customer engagement, writing the first CLAUDE.md together is a powerful onboarding moment. It forces the team to articulate conventions they've never written down \u2014 which is itself valuable even without Claude Code.",
     timing: "8 min",
@@ -80,7 +60,7 @@ const DAY2_STEPS = [
     title: "The 'after' \u2014 Claude with CLAUDE.md",
     context: "claude",
     desc: "Exit and re-launch Claude Code so it picks up your CLAUDE.md. Ask the exact same refactoring question. The difference should be visible \u2014 async/await instead of callbacks, JSDoc instead of inline comments, co-located tests.",
-    prompt: "Refactor src/utils/helpers.js to follow our project conventions. Add proper error handling, documentation, and tests.",
+    prompt: "Refactor src/utils/helpers.js to follow our project conventions.",
     narration: "As Claude works: 'Same task, same repo, different output. Watch \u2014 async/await instead of callbacks. JSDoc instead of inline comments. Tests co-located with the source file. It's following the CLAUDE.md like a new team member who actually read the onboarding doc.'",
     keyPoint: "This before/after comparison is the single most persuasive demo in the entire Basecamp program. When you show this to a customer, you're not talking about AI in the abstract \u2014 you're showing their conventions being followed automatically.",
     timing: "8 min",
@@ -125,9 +105,9 @@ const DAY2_STEPS = [
     title: "Prompt patterns that work",
     context: "claude",
     desc: "The difference between a good prompt and a great prompt comes down to specificity and structure. Compare these patterns:",
-    prompt: "Using the patterns from our CLAUDE.md, add a new POST /api/shipments endpoint that creates a shipment record. Follow the same patterns as the existing routes. Include input validation, error handling, and tests.",
+    prompt: "Using the patterns from our CLAUDE.md, add a new POST /api/shipments endpoint that creates a shipment record. Follow the same patterns as the existing routes.",
     narration: "'Notice the prompt structure: what to build, which patterns to follow, and what quality means. Vague prompts like 'add a shipments endpoint' force Claude to guess. Specific prompts like this one get consistent, convention-matching output on the first try.'",
-    tip: "The three-part prompt pattern: WHAT (the task) + HOW (the conventions/patterns) + VERIFY (tests, validation). This pattern works for any coding task and is the foundation of effective agentic prompting.",
+    tip: "The two-part prompt pattern: WHAT (the task) + HOW (the conventions/patterns to follow). Vague prompts force Claude to guess. Specific prompts get consistent output on the first try.",
     timing: "5 min",
   },
   {
